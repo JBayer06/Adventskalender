@@ -3,34 +3,28 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { StorageService } from "./storage.service";
 import { AuthenticationService } from "./authentication.service";
-import { getApiUrl } from "../_helpers/apiUrl";
 
 @Injectable({
     providedIn: "root",
 })
 export class RemoteService {
-    private pApiUrl = "";
     constructor(private httpClient: HttpClient, private storageService: StorageService) {
-        this.pApiUrl = getApiUrl();
     }
 
     public getImageUrl(url: string, authService: AuthenticationService): string {
-        return `${this.pApiUrl}/${url}?authorization=${authService.currentUser?.jwtToken}`;
+        return `/api/${url}?authorization=${authService.currentUser?.jwtToken}`;
     }
 
     public get(url: string): Observable<any> {
-        if (!this.pApiUrl) {
-            return new Subject();
-        }
-        return this.httpClient.get(`${this.pApiUrl}/${url}`);
+        return this.httpClient.get(`/api/${url}`);
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public post(url: string, data: { [key: string]: any }, options?: any): Observable<any> {
-        return this.httpClient.post(`${this.pApiUrl}/${url}`, data, options);
+        return this.httpClient.post(`/api/${url}`, data, options);
     }
 
     public delete(url: string): Observable<any> {
-        return this.httpClient.delete(`${this.pApiUrl}/${url}`);
+        return this.httpClient.delete(`/api/${url}`);
     }
 }
