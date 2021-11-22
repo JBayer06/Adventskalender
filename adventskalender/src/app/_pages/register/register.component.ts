@@ -12,6 +12,7 @@ import { AlertService } from "../../_services/alert.service";
     styleUrls: ["./register.component.scss"],
 })
 export class RegisterComponent {
+    public year = new Date().getFullYear();
     public form: FormGroup;
     public submitted = false;
     public loading = false;

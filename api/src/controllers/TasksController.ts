@@ -184,7 +184,7 @@ class TasksController {
             <body>
                 <div class="container-fluid">
                     <div class="row">
-                        ${openTasks.length == 0 ? "<div class='jumbotron mb-0 w-100 text-center pt-5'><h1 class='mt-5 pt-5'><img class='py-5' src='/assets/logos/header.png'><br>Der AGventskalender startet am 01.12.2020!</h1></div>" : genTable()}
+                        ${openTasks.length == 0 ? `<div class='jumbotron mb-0 w-100 text-center pt-5'><h1 class='mt-5 pt-5'><img class='py-5' src='/assets/logos/header.png'><br>Der AGventskalender startet am 01.12.${new Date().getFullYear()}!</h1></div>` : genTable()}
                     </div>
                 </div>
             </body>

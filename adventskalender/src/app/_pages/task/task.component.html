@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="mt-5">
-        <a class="btn btn-secondary mr-2" routerLink="/tasks" [disabled]="saving">Zurück</a>
+        <a class="btn btn-secondary mr-2" routerLink="/tasks" [attr.disabled]="saving">Zurück</a>
         <button class="btn btn-success" [disabled]="!selectedField?.row || !selectedField?.col || saving" *ngIf="task.status == 'OPEN'" (click)="save()">Speichern <div *ngIf="saving" class="ml-2 spinner-border spinner-border-sm"></div></button>
     </div>
 

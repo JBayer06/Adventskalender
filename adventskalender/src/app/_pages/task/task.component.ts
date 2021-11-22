@@ -43,7 +43,7 @@ export class TaskComponent {
 
                     let add = 0;
                     while (getTaskStatus(this.task, this.task.day + add) == TaskStatus.OPEN) {
-                        this.due = new Date(2020, 11, this.task.day + add);
+                        this.due = new Date(2021, 11, this.task.day + add);
                         add++;
                     }
                     this.loading = false;

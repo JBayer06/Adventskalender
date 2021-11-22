@@ -12,6 +12,7 @@ import { StorageService } from "../../_services/storage.service";
     styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
+    public year = new Date().getFullYear();
     public loginForm: FormGroup;
     public resetPasswordForm: FormGroup;
     public newPasswordForm: FormGroup;
