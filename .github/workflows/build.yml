@@ -34,6 +34,7 @@ jobs:
       working-directory: adventskalender
       run: npm run build
   build_docker:
+    if: github.ref == 'refs/heads/master'
     name: Docker Build
     runs-on: ubuntu-latest
     steps:
