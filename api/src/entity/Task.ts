@@ -8,14 +8,8 @@ export type Task = {
     status?: TaskStatus;
     solutionStatus?: SolutionStatus;
     guess?: Field;
-    young: {
-        description: string;
-        solutions: Field[];
-    };
-    old: {
-        description: string;
-        solutions: Field[];
-    };
+    description: string;
+    solutions: Field[];
 };
 
 export enum TaskStatus {

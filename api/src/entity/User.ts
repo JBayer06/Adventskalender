@@ -54,8 +54,6 @@ export class User {
 
     public place?: number;
 
-    public isYoung?: boolean;
-
     public hashPassword(): void {
         this.password = bcrypt.hashSync(this.password, 8);
     }

@@ -41,7 +41,6 @@ class AuthController {
                 userId: user.id,
                 nickname: user.nickname,
                 isAdmin: user.isAdmin,
-                isYoung: checkUserYoung(user),
             },
             req.app.locals.config.JWT_SECRET,
             { expiresIn: "1h" },
@@ -49,7 +48,6 @@ class AuthController {
 
         const response = {
             ...user,
-            isYoung: checkUserYoung(user),
             jwtToken: token,
         };
         response.password = undefined;
@@ -74,10 +72,10 @@ class AuthController {
             return;
         }
         const {
-            userId, nickname, isAdmin, isYoung,
+            userId, nickname, isAdmin,
         } = jwtPayload;
         const newToken = jwt.sign({
-            userId, nickname, isAdmin, isYoung,
+            userId, nickname, isAdmin,
         }, req.app.locals.config.JWT_SECRET, {
             expiresIn: "1h",
         });
@@ -89,7 +87,6 @@ class AuthController {
                 nickname,
                 isAdmin,
                 jwtToken: newToken,
-                isYoung,
             },
         });
     }
@@ -172,9 +169,3 @@ class AuthController {
     }
 }
 export default AuthController;
-export function checkUserYoung(user: User): boolean {
-    if (!user.grade) {
-        throw Error(`got ${user}`);
-    }
-    return user.grade.startsWith("5") || user.grade.startsWith("6");
-}

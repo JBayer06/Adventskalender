@@ -8,7 +8,6 @@ import { TaskSolution } from "../entity/TaskSolution";
 import { User } from "../entity/User";
 import { tasks } from "../resources/tasks";
 import { getTaskStatus } from "../helpers/task-status";
-import { checkUserYoung } from "./AuthController";
 import { mergeDeep } from "../helpers/merge-deep";
 
 class TasksController {
@@ -38,8 +37,7 @@ class TasksController {
                     ? SolutionStatus.CORRECT
                     : SolutionStatus.INCORRECT;
             } else {
-                t.young.solutions = undefined;
-                t.old.solutions = undefined;
+                t.solutions = undefined;
             }
             ts.push(t);
         }
@@ -77,8 +75,7 @@ class TasksController {
                 ? SolutionStatus.CORRECT
                 : SolutionStatus.INCORRECT;
         } else {
-            t.young.solutions = undefined;
-            t.old.solutions = undefined;
+            t.solutions = undefined;
         }
         res.send(t);
     }
@@ -97,9 +94,8 @@ class TasksController {
         }
         const getTdTag = (t: Task, old: boolean) => {
             const filename = `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`;
-            const { description } = t[old ? "old" : "young"];
             const filedata = fs.readFileSync(path.join(__dirname, "../../assets/images/", filename)).toString("base64");
-            return `<td class="img-holder"><div class="overlay"><span class="day">${t.day}</span><br><span class="description">${description}</span></div><img class="img-responsive" src="data:image/jpg;base64,${filedata}"></td>`;
+            return `<td class="img-holder"><div class="overlay"><span class="day">${t.day}</span><br><span class="description">${t.description}</span></div><img class="img-responsive" src="data:image/jpg;base64,${filedata}"></td>`;
         };
         const genTable = () => `<table>
             <tbody>
@@ -201,7 +197,7 @@ class TasksController {
             res.status(401).send("Diese Aufgabe ist noch nicht freigeschalten!");
             return;
         }
-        res.sendFile(path.join(__dirname, "../../assets/images/", `${day}_${checkUserYoung(res.locals.jwtPayload.user) ? "jung" : "alt"}_${t.status == TaskStatus.SOLVED ? "loesung" : "raetsel"}.jpg`));
+        res.sendFile(path.join(__dirname, "../../assets/images/", `${day}_${t.status == TaskStatus.SOLVED ? "loesung" : "raetsel"}.jpg`));
     }
 
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
@@ -253,7 +249,7 @@ export function taskSolvedCorrectly(user: User, t: Task): boolean {
     if (!(t.guess?.row && t.guess?.col)) {
         return false;
     }
-    return !!t[checkUserYoung(user) ? "young" : "old"]?.solutions?.find((s) => s.row == t.guess.row && s.col == t.guess.col);
+    return !!t?.solutions?.find((s) => s.row == t.guess.row && s.col == t.guess.col);
 }
 
 export function getForceDay(req: Request, res: Response): number {

@@ -18,10 +18,6 @@ export class AuthenticationService {
         private storageService: StorageService,
     ) { }
 
-    get isYoung(): boolean {
-        return this.currentUser.isYoung;
-    }
-
     public login(nickname: string, password: string): Observable<any> {
         return this.remoteService.post("auth/login", { password, nickname }).pipe(
             map((user: any) => {

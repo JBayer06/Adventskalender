@@ -16,14 +16,8 @@
 /* do not edit */     status?: TaskStatus;
 /* do not edit */     solutionStatus?: SolutionStatus;
 /* do not edit */     guess?: Field;
-/* do not edit */     young: {
-/* do not edit */         description: string;
-/* do not edit */         solutions: Field[];
-/* do not edit */     };
-/* do not edit */     old: {
-/* do not edit */         description: string;
-/* do not edit */         solutions: Field[];
-/* do not edit */     };
+/* do not edit */     description: string;
+/* do not edit */     solutions: Field[];
 /* do not edit */ };
 /* do not edit */ 
 /* do not edit */ export enum TaskStatus {

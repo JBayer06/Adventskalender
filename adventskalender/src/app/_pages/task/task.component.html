@@ -8,7 +8,7 @@
             </div>
             <img class="img-fluid" [src]="remoteService.getImageUrl('tasks/images/'+task.day, authenticationService)">
             <div class="card p-3">
-                {{task[authenticationService.isYoung ? 'young' : 'old'].description}}
+                {{task.description}}
             </div>
         </div>
         <div class="col col-12 col-lg-6">

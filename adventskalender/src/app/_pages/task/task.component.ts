@@ -63,12 +63,11 @@ export class TaskComponent {
     }
 
     public getCorrectSolutionsString(): string {
-        const { solutions } = this.task[this.authenticationService.isYoung ? "young" : "old"];
-        return solutions.length == 1
-            ? this.printField(solutions[0])
-            : solutions.length == 2
-                ? `${this.printField(solutions[0])} oder ${this.printField(solutions[1])}`
-                : `${solutions.slice(0, solutions.length - 2).map((f) => this.printField(f)).join(", ")}, ${this.printField(solutions[solutions.length - 2])} oder ${this.printField(solutions[solutions.length - 1])}`;
+        return this.task.solutions.length == 1
+            ? this.printField(this.task.solutions[0])
+            : this.task.solutions.length == 2
+                ? `${this.printField(this.task.solutions[0])} oder ${this.printField(this.task.solutions[1])}`
+                : `${this.task.solutions.slice(0, this.task.solutions.length - 2).map((f) => this.printField(f)).join(", ")}, ${this.printField(this.task.solutions[this.task.solutions.length - 2])} oder ${this.printField(this.task.solutions[this.task.solutions.length - 1])}`;
     }
 
     private printField(field: Field) {

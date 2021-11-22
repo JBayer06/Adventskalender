@@ -54,8 +54,6 @@
 /* do not edit */ 
 /* do not edit */     public place?: number;
 /* do not edit */ 
-/* do not edit */     public isYoung?: boolean;
-/* do not edit */ 
 /* do not edit */     
 /* do not edit */ 
 /* do not edit */     
