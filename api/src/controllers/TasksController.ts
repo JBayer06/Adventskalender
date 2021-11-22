@@ -197,7 +197,9 @@ class TasksController {
             res.status(401).send("Diese Aufgabe ist noch nicht freigeschalten!");
             return;
         }
-        res.sendFile(path.join(__dirname, "../../assets/images/", `${day}_${t.status == TaskStatus.SOLVED ? "loesung" : "raetsel"}.jpg`));
+        const suffix = t.status == TaskStatus.SOLVED ? "loesung" : "raetsel";
+        const filename = `${day}_${suffix}.jpg`;
+        res.sendFile(path.join(__dirname, "../../assets/images/", filename));
     }
 
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
