@@ -54,7 +54,9 @@ createConnection({
         app.locals.config = config;
 
         app.use(cors());
-        app.use(helmet());
+        app.use(helmet({
+            frameguard: false,
+        }));
         app.use(bodyParser.urlencoded({
             extended: true,
         }));
