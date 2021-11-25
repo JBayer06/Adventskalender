@@ -81,10 +81,7 @@ class TasksController {
     }
 
     public static kiosk = async (req: Request, res: Response): Promise<void> => {
-        let forceDay: number;
-        if (req.app.locals.config.TEST_MODE && req.query.forceDay) {
-            forceDay = parseInt(req.query.forceDay, 10);
-        }
+        const forceDay = getForceDay(req, res);
         const openTasks: Task[] = [];
         for (const t of tasks) {
             const task = mergeDeep({}, t);
@@ -92,33 +89,33 @@ class TasksController {
                 openTasks.push(t);
             }
         }
-        const getTdTag = (t: Task, old: boolean) => {
-            const filename = `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`;
+        const genTable = () => `
+        <div class="w-100">
+            <div class="d-flex justify-content-between bg-danger px-3">
+                <img class="header mt-2" src="/assets/logos/header.png">
+                <h1 class="my-4 headline text-white">AGventskalender</h1>
+                <h4 class="mr-2 mt-5 text-white">Stand: ${new Date().toLocaleString()} Uhr</h4>
+            </div>
+        
+            <div class="container-fluid">
+                <div class="row p-4 bg-light-transparent">
+                    <div class="d-flex justify-content-between mt-5 pt-5">
+                ${openTasks.map((t) => {
+            const filename = `${t.day}_raetsel.jpg`;
             const filedata = fs.readFileSync(path.join(__dirname, "../../assets/images/", filename)).toString("base64");
-            return `<td class="img-holder"><div class="overlay"><span class="day">${t.day}</span><br><span class="description">${t.description}</span></div><img class="img-responsive" src="data:image/jpg;base64,${filedata}"></td>`;
-        };
-        const genTable = () => `<table>
-            <tbody>
-                <tr class="text text-center">
-                    <td colspan="${openTasks.length}">
-                        <div class="d-flex justify-content-between">
-                            <img class="header" src="/assets/logos/header.png">
-                            <h1 class="mt-4">Klasse 5 und 6</h1>
-                            <h4 class="mr-2 mt-2">Stand: ${new Date().toLocaleString()} Uhr</h4>
+            return `
+                    <div class="image-holder">
+                        <img class="img-responsive" src="data:image/jpg;base64,${filedata}">
+                        <div class="texts px-4">
+                            <span class="day d-block">${t.day}</span>
+                            <span class="description d-block">${t.description}</span>
                         </div>
-                    </td>
-                </tr>
-                <tr class="images">
-                    ${openTasks.map((t) => getTdTag(t, false)).join("")}
-                </tr>
-                <tr class="text text-center">
-                    <td colspan="${openTasks.length}"><h1>Klasse 7 bis 12</h1></td>
-                </tr>
-                <tr class="images">
-                    ${openTasks.map((t) => getTdTag(t, true)).join("")}
-                </tr>
-            </tbody>
-        </table>`;
+                    </div>`;
+        }).join("")}
+                    </div>
+                </div>
+            </div>
+        </div>`;
         res.send(`
         <!DOCTYPE html>
         <html>
@@ -127,49 +124,50 @@ class TasksController {
                 <meta http-equiv="refresh" content="60">
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
                 <style>
-                    body {
-                        
-                    }
                     html, body, div.container-fluid, div.row, table, tbody {
                         height: 100vh;
                         width: 100vw;
                         overflow: hidden;
                     }
-                    tr.text {
-                        height: 10%;
+                    body {
+                        background-image: url(/assets/backgrounds/banner.jpg);
+                        background-size: cover;
+                        background-attachment: fixed;
+                        background-position: 50%;
                     }
-                    tr.images {
-                        height: 40%;
+                    .bg-light-transparent {
+                        background-color: #ffffff88;
                     }
-                    td.img-holder {
-                        height: 40%;
-                        position: relative;
+                    .headline {
+                        font-size: 4.5rem;
                     }
-                    div.overlay {
-                        position: absolute;
-                        bottom: 0;
-                        width: 100%;
+                    .image-holder {
+                        flex-basis: 25%;
+                    }
+                    div.texts {
                         text-align: center;
                     }
-                    div.overlay span.day {
-                        font-size: 3rem;
-                        color: #fff;
-                        text-shadow: -2px 0 black, 0 1px black, 2px 0 black, 0 -2px black;
+                    div.texts span.day {
+                        font-size: 5rem;
+                        color: #000000;
+                        text-shadow: -2px 0 white, 0px 2px white, 2px 0 white, 0 -2px white;
                     }
-                    div.overlay span.description {
-                        font-size: 1rem;
+                    div.texts span.description {
+                        font-size: 2rem;
                         background-color: white;
                         padding: 0.5rem;
                         line-height: 2rem;
                         font-weight: bold;
+                        border-radius: 10px;
                     }
                     .img-responsive {
-                        height: 13rem;
+                        height: 28rem;
                         max-width: 100%;
-                        max-height: 100%;
                         display: block;
                         margin: 0 auto;
-                        padding-bottom: 2.5rem;
+                        margin-bottom: 1.5rem;
+                        border: 5px solid white;
+                        border-radius: 10px;
                     }
 
                     img.header {
@@ -178,11 +176,19 @@ class TasksController {
                 </style>
             </head>
             <body>
+                ${openTasks.length == 0 ? `
                 <div class="container-fluid">
-                    <div class="row">
-                        ${openTasks.length == 0 ? `<div class='jumbotron mb-0 w-100 text-center pt-5'><h1 class='mt-5 pt-5'><img class='py-5' src='/assets/logos/header.png'><br>Der AGventskalender startet am 01.12.${new Date().getFullYear()}!</h1></div>` : genTable()}
-                    </div>
+                    <div class="row p-4">
+                    <div class='jumbotron mb-0 w-100 text-center pt-5'>
+                    <img class='py-5' src='/assets/logos/header.png'>
+                    <h1 class='headline mt-5 pt-5 w-50 m-auto'>
+                        Der AGventskalender startet am 01.12.${new Date().getFullYear()}.<br><br>
+                        Jetzt auf der Schulhomepage anmelden und mitmachen!
+                    </h1>
                 </div>
+                </div>
+                </div>`
+            : genTable()}
             </body>
         </html>
         `);
