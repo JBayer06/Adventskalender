@@ -99,7 +99,7 @@ class TasksController {
         
             <div class="container-fluid">
                 <div class="row p-4 bg-light-transparent">
-                    <div class="d-flex justify-content-between mt-5 pt-5">
+                    <div class="d-flex justify-content-between mt-5 pt-5 w-100">
                 ${openTasks.map((t) => {
             const filename = `${t.day}_raetsel.jpg`;
             const filedata = fs.readFileSync(path.join(__dirname, "../../assets/images/", filename)).toString("base64");
@@ -108,7 +108,7 @@ class TasksController {
                         <img class="img-responsive" src="data:image/jpg;base64,${filedata}">
                         <div class="texts px-4">
                             <span class="day d-block">${t.day}</span>
-                            <span class="description d-block">${t.description}</span>
+                            <span class="description d-inline-block">${t.description}</span>
                         </div>
                     </div>`;
         }).join("")}
@@ -142,7 +142,7 @@ class TasksController {
                         font-size: 4.5rem;
                     }
                     .image-holder {
-                        flex-basis: 25%;
+                        flex-basis: ${openTasks.length == 4 ? "25%" : openTasks.length == 3 ? "33%" : openTasks.length == 2 ? "50%" : "100%"};
                     }
                     div.texts {
                         text-align: center;
@@ -159,6 +159,7 @@ class TasksController {
                         line-height: 2rem;
                         font-weight: bold;
                         border-radius: 10px;
+                        display: 
                     }
                     .img-responsive {
                         height: 28rem;
