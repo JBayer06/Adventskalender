@@ -6,10 +6,6 @@ export function getBack(taskDay: number, dayOfWeek: number): number {
     if (taskDay == CHRISTMAS) {
         return 4;
     }
-    // because of some people having problems on iOS devices
-    if (taskDay == 1) {
-        return 3;
-    }
 
     enum DayOfWeek {
         SUNDAY = 0,
