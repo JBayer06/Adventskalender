@@ -30,8 +30,16 @@ export class ScoresComponent {
             name: "Schüler",
         },
         {
+            id: "formerStudents",
+            name: "Ehemalige Schüler",
+        },
+        {
             id: "teachers",
             name: "Lehrer",
+        },
+        {
+            id: "parents",
+            name: "Eltern",
         },
         {
             id: "grades-absolute",
@@ -63,8 +71,12 @@ export class ScoresComponent {
             this.users = this.allUsers;
         } else if (this.currentView.id == "students") {
             this.users = this.allUsers.filter((u) => u.grade.length < 4);
+        } else if (this.currentView.id == "formerStudents") {
+            this.users = this.allUsers.filter((u) => u.grade == "Ehemalige Schülerin oder Schüler");
+        } else if (this.currentView.id == "parents") {
+            this.users = this.allUsers.filter((u) => u.grade == "Eltern");
         } else if (this.currentView.id == "teachers") {
-            this.users = this.allUsers.filter((u) => u.grade.length > 4);
+            this.users = this.allUsers.filter((u) => u.grade === "Lehrerin / Lehrer" || u.grade.startsWith("Studienseminar"));
         } else if (this.currentView.id == "grades-relative" || this.currentView.id == "grades-absolute") {
             const grades = {};
             for (const user of this.allUsers) {
