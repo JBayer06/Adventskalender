@@ -98,7 +98,7 @@ export const tasks: readonly Task[] = Object.freeze([
     },
     {
         day: 20,
-        description: "Die Leute hier laufen kreuz und quer- von links nach rechts, treppauf, treppab.",
+        description: "Die Leute hier laufen kreuz und quer - von links nach rechts, treppauf, treppab.",
         solutions: [{ col: "E", row: 6 }],
     },
     {
