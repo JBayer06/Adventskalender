@@ -28,8 +28,8 @@ export const tasks: readonly Task[] = Object.freeze([
     },
     {
         day: 6,
-        description: "Neben gespenstischen Heuschecken und freiheitsliebenden Schlangen gibt es am AG auch sportliche Mäuse - aber wo nur?",
-        solutions: [{ col: "D", row: 5 }],
+        description: "Springt bei dir der Funke über?",
+        solutions: [{ col: "F", row: 8 }],
     },
     {
         day: 7,
