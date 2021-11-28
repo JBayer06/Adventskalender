@@ -3,7 +3,7 @@ import { Task } from "../entity/Task";
 export const tasks: readonly Task[] = Object.freeze([
     {
         day: 1,
-        description: "Wegweisende Bauklötzchen",
+        description: "Wegweisende Bauklötzchen.",
         solutions: [{ col: "E", row: 1 }, { col: "E", row: 2 }],
     },
     {
@@ -18,12 +18,12 @@ export const tasks: readonly Task[] = Object.freeze([
     },
     {
         day: 4,
-        description: "Ein in Stein gemeißelter Anker!? Das gibts doch auf keinem Schiff! Aber im Urwald hinterm AG!",
+        description: "Ein in Stein gemeißelter Anker!? Das gibt's doch auf keinem Schiff! Aber im Urwald hinterm AG.",
         solutions: [{ col: "A", row: 8 }, { col: "A", row: 9 }],
     },
     {
         day: 5,
-        description: "Durchblick schadet nie. Nicht im Unterricht und nicht durch eine Wand in luftiger Höhe.",
+        description: "Durchblick schadet nie: Nicht im Unterricht und nicht durch eine Wand in luftiger Höhe.",
         solutions: [{ col: "G", row: 4 }],
     },
     {
@@ -103,12 +103,12 @@ export const tasks: readonly Task[] = Object.freeze([
     },
     {
         day: 21,
-        description: "Ein Landeplatz für Insekten",
+        description: "Ein Landeplatz für Insekten.",
         solutions: [{ col: "G", row: 2 }, { col: "H", row: 2 }],
     },
     {
         day: 22,
-        description: "Ästhetik des Funktionalen",
+        description: "Ästhetik des Funktionalen.",
         solutions: [{ col: "G", row: 5 }],
     },
     {
