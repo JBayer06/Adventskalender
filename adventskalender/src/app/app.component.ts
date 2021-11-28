@@ -144,6 +144,6 @@ Visit http://rainbow.arch.scriptmania.com/scripts/
                 this.snow[i].posy = 0;
             }
         }
-        setTimeout(() => this.moveSnow(), 50);
+        setTimeout(() => this.moveSnow(), 30);
     }
 }
