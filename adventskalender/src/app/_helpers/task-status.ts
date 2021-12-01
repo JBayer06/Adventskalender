@@ -14,10 +14,6 @@
 /* do not edit */     if (taskDay == CHRISTMAS) {
 /* do not edit */         return 4;
 /* do not edit */     }
-/* do not edit */     // because of some people having problems on iOS devices
-/* do not edit */     if (taskDay == 1) {
-/* do not edit */         return 3;
-/* do not edit */     }
 /* do not edit */ 
 /* do not edit */     enum DayOfWeek {
 /* do not edit */         SUNDAY = 0,
