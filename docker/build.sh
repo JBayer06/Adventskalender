@@ -5,7 +5,7 @@ npm run build -- --outputPath=../docker/frontend
 echo "--- Building backend ---"
 cd ../api
 npm install
-sudo npx @vercel/ncc build src/index.ts -o ../docker/backend
+npx -y @vercel/ncc build src/index.ts -o ../docker/backend
 echo "--- Copying env ---"
 cd ..
 cp ./container-env.json ./docker/container-env.json
