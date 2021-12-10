@@ -34,7 +34,7 @@ export const tasks: readonly Task[] = Object.freeze([
     {
         day: 7,
         description: "Ein ziemlich einfaches Modell des Sonnensystems. Besonders nützlich an heißen Tagen.",
-        solutions: [{ col: "F", row: 6 }],
+        solutions: [{ col: "F", row: 5 }, { col: "G", row: 5 }],
     },
     {
         day: 8,
