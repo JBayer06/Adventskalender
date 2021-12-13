@@ -64,7 +64,7 @@ export const tasks: readonly Task[] = Object.freeze([
     {
         day: 13,
         description: "Geht dir ein Licht auf? Wenn nicht, dann mach mal Pause!",
-        solutions: [{ col: "F", row: 8 }],
+        solutions: [{ col: "E", row: 7 }, { col: "F", row: 7 }],
     },
     {
         day: 14,
@@ -79,7 +79,7 @@ export const tasks: readonly Task[] = Object.freeze([
     {
         day: 16,
         description: "Da soll doch noch mal jemand behaupten, Schränke hätten keine Persönlichkeit!",
-        solutions: [{ col: "F", row: 6 }],
+        solutions: [{ col: "F", row: 5 }],
     },
     {
         day: 17,
@@ -114,7 +114,7 @@ export const tasks: readonly Task[] = Object.freeze([
     {
         day: 23,
         description: "Wer von Sport zu spät kommt, der wird streng beäugt!",
-        solutions: [{ col: "G", row: 4 }],
+        solutions: [{ col: "G", row: 4 }, { col: "H", row: 4 }],
     },
     {
         day: 24,
