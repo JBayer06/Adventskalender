@@ -114,7 +114,7 @@ export const tasks: readonly Task[] = Object.freeze([
     {
         day: 23,
         description: "Wer von Sport zu spät kommt, der wird streng beäugt!",
-        solutions: [{ col: "G", row: 4 }, { col: "H", row: 4 }],
+        solutions: [{ col: "G", row: 3 }, { col: "G", row: 4 }, { col: "H", row: 3 }, { col: "H", row: 4 }],
     },
     {
         day: 24,
