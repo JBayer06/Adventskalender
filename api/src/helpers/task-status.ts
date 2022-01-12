@@ -39,7 +39,7 @@ export function getBack(taskDay: number, dayOfWeek: number): number {
 }
 
 export function getTaskStatus(task: Task, fakeTodayForTesting?: number): TaskStatus {
-    const year = new Date().getFullYear();
+    const year = 2021;
     let now: Date;
     // let todayDay: number;
     let date: Date;

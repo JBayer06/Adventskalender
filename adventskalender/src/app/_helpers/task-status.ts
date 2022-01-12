@@ -47,7 +47,7 @@
 /* do not edit */ }
 /* do not edit */ 
 /* do not edit */ export function getTaskStatus(task: Task, fakeTodayForTesting?: number): TaskStatus {
-/* do not edit */     const year = new Date().getFullYear();
+/* do not edit */     const year = 2021;
 /* do not edit */     let now: Date;
 /* do not edit */     // let todayDay: number;
 /* do not edit */     let date: Date;
