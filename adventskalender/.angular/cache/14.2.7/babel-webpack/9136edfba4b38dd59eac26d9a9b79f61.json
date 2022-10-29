@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { HttpParams } from \"@angular/common/http\";\nexport class NoErrorHttpParams extends HttpParams {\n  constructor(dontShowAlert) {\n    super();\n    this.dontShowAlert = dontShowAlert;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
