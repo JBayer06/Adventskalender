@@ -59,7 +59,7 @@
     },
     "scripts": {
         "tsc": "tsc",
-        "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+        "start": "set debug=* && ts-node-dev --respawn --transpile-only ./src/index.ts",
         "prod": "tsc && node ./build/index.js",
         "build": "tsc",
         "lint": "eslint .",
